@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TA-2021_2022-12</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    
+    <div class="container home">
+        <div class="title row justify-content-center">
+            <div class="col-2 text-center">
+                <img class="logo-img" src="{{ url_for('static', filename='img/himasti.png') }}" alt="Himasti">
+            </div>
+            <div class="col-8 text-center">
+                <h1>Prediksi Kinerja Karyawan</h1>
+            </div>
+            <div class="col-2 text-center">
+                <img class="logo-img" src="{{ url_for('static', filename='img/itdel.png') }}" alt="IT Del">
+            </div>
+        </div>
+
+        <div class="box mt-4 mb-4">
+
+            <div class="text-center mt-4 mb-4">
+                <h3>Prediction History</h3>
+            </div>
+            
+            <div id="table-result" class="box-result">
+                <table class="table table-hover">
+                    <thead id="thead-result" class="">
+                        <tr>
+                            <th scope="col" class="align-middle text-center">No</th>
+                            <th scope="col" class="align-middle text-center">Job Duration in Current <br> Job Level</th>
+                            <th scope="col" class="align-middle text-center">Job Duration in Current <br> Person Level</th>
+                            <th scope="col" class="align-middle text-center">Job Duration in Current <br> Branch</th>
+                            <th scope="col" class="align-middle text-center">Employee Type</th>
+                            <th scope="col" class="align-middle text-center">Gender</th>
+                            <th scope="col" class="align-middle text-center">Age</th>
+                            <th scope="col" class="align-middle text-center">Number of <br> Dependences</th>
+                            <th scope="col" class="align-middle text-center">Education Level</th>
+                            <th scope="col" class="align-middle text-center">GPA</th>
+                            <th scope="col" class="align-middle text-center">Year Graduated</th>
+                            <th scope="col" class="align-middle text-center">Job Duration From <br> Training</th>
+                            <th scope="col" class="align-middle text-center">Branch Rotation</th>
+                            <th scope="col" class="align-middle text-center">Job Rotation</th>
+                            <th scope="col" class="align-middle text-center">Assign of Other <br> Position</th>
+                            <th scope="col" class="align-middle text-center">Annual Leave</th>
+                            <th scope="col" class="align-middle text-center">Sick Leaves</th>
+                            <th scope="col" class="align-middle text-center">Last Achievement %</th>
+                            <th scope="col" class="align-middle text-center">Achievement Above 100% <br> During 3 Quartal</th>
+                            <th scope="col" class="align-middle text-center">Best Performance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for data in datas %}
+                        <tr>
+                            <th scope="row" class="align-middle text-center">{{ loop.index }}</th>
+                            <td class="align-middle text-center">{{ data.last_achievement }}</td>
+                            <td class="align-middle text-center">{{ data.sick_leaves }}</td>
+                            <td class="align-middle text-center">{{ data.age }}</td>
+                            <td class="align-middle text-center">{{ data.job_rotation }}</td>
+                            <td class="align-middle text-center">{{ data.year_graduated }}</td>
+                            <td class="align-middle text-center">{{ data.job_duration_from_training }}</td>
+                            <td class="align-middle text-center">{{ data.branch_rotation }}</td>
+                            <td class="align-middle text-center">{{ data.assign_of_other_position }}</td>
+                            <td class="align-middle text-center">{{ data.annual_leave }}</td>
+                            <td class="align-middle text-center">{{ data.gpa }}</td>
+                            <td class="align-middle text-center">{{ data.job_duration_in_current_branch }}</td>
+                            <td class="align-middle text-center">
+                                {% if (data.gender == '1') %}
+                                    Female
+                                {% endif %}
+                                {% if (data.gender == '2') %}
+                                    Male
+                                {% endif %}
+                            </td>
+                            <td class="align-middle text-center">{{ data.number_of_dependences }}</td>
+                            <td class="align-middle text-center">{{ data.job_duration_in_current_person_level }}</td>
+                            <td class="align-middle text-center">
+                                {% if (data.education_level == '0') %}
+                                    Level 0
+                                {% endif %}
+                                {% if (data.education_level == '1') %}
+                                    Level 1                                
+                                {% endif %}
+                                {% if (data.education_level == '2') %}
+                                    Level 2
+                                {% endif %}
+                                {% if (data.education_level == '3') %}
+                                    Level 3
+                                {% endif %}
+                                {% if (data.education_level == '4') %}
+                                    Level 4
+                                {% endif %}
+                                {% if (data.education_level == '5') %}
+                                    Level 5
+                                {% endif %}
+                            </td>
+                            <td class="align-middle text-center">
+                                {% if (data.employee_type == '0') %}
+                                    RM_Type_A
+                                {% endif %}
+                                {% if (data.employee_type == '1') %}
+                                    RM_Type_B
+                                {% endif %}
+                                {% if (data.employee_type == '2') %}
+                                    RM_Type_C
+                                {% endif %}
+                            </td>
+                            <td class="align-middle text-center">{{ data.job_duration_in_current_job_level }}</td>
+                            <td class="align-middle text-center">{{ data.achievement_above_100_during3quartal }}</td>
+                            <td class="align-middle text-center">
+                                {% if (data.best_performance == '1') %}
+                                    Yes
+                                {% endif %}
+                                {% if (data.best_performance == '0') %}
+                                    No
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let thethead = document.getElementById("thead-result");
+        let table_result = document.getElementById("table-result");
+
+        table_result.addEventListener("scroll", e => {
+        
+            let scrollPos = e.target.scrollTop;
+        
+            if (scrollPos > 0) {
+                thethead.classList.add('sticky');
+                thethead.classList.add('thead-light');
+                thethead.classList.add('table-borderless');
+            } else {
+                thethead.classList.remove('sticky');
+                thethead.classList.remove('thead-light');
+                thethead.classList.remove('table-borderless');
+            }
+        });
+    </script>
+</body>
+</html>
