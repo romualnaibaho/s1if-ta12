@@ -3,17 +3,11 @@ import pickle
 import pandas as pd
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-import os
-import re
 
 app = Flask(__name__)
 
 # initialize the database
-uri = os.getenv("DATABASE_URL")  # or other relevant config var
-if uri and uri.startswith("postgres://"):
-  uri = uri.replace("postgres://", "postgresql://", 1)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = uri
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://bgzazkpoiqlyyr:5e66f7601ee0bd3d7558fc6826b955b4f87addb9ec08cffb962674d77f6102d7@ec2-34-225-159-178.compute-1.amazonaws.com:5432/d8tqk9oito2bt4'
 
 db = SQLAlchemy(app)
 
