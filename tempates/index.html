@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TA-2021_2022-12</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    
+    <div class="container home">
+        <div class="title row justify-content-center">
+            <div class="col-2 text-center">
+                <img class="logo-img" src="{{ url_for('static', filename='img/himasti.png') }}" alt="Himasti">
+            </div>
+            <div class="col-8 text-center">
+                <h1>Prediksi Kinerja Karyawan</h1>
+            </div>
+            <div class="col-2 text-center">
+                <img class="logo-img" src="{{ url_for('static', filename='img/itdel.png') }}" alt="IT Del">
+            </div>
+        </div>
+
+        <div class="box mt-4 mb-4">
+            <form action="/predict" method="POST">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="employee_type">Employee Type</label>
+                            <select class="form-control" name = "employee_type" id="employee_type" required>
+                                <option value="">--</option>
+                                <option value="0">RM_Type_A</option>
+                                <option value="1">RM_Type_B</option>
+                                <option value="2">RM_Type_C</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <select class="form-control" name="age" id="age" required>
+                                <option value="">--</option>
+                            </select>
+                            <small class="form-text text-muted">Select your year of birth.</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="year_graduated">Year Graduated</label>
+                            <select class="form-control" name="year_graduated" id="year_graduated" required>
+                                <option value="">--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="job_duration_from_training">Job Duration From Training</label>
+                            <input type="number" step="any" min="0" class="form-control" name="job_duration_from_training" id="job_duration_from_training" required>
+                            <small class="form-text text-muted">Choose a number that represents in years.</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="sick_leaves">Sick Leaves</label>
+                            <input type="number" min="0" class="form-control" name="sick_leaves" id="sick_leaves" required>
+                            <small class="form-text text-muted">Choose a number that represents in units of days.</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="job_rotation">Job Rotation</label>
+                            <input type="number" min="0" class="form-control" name="job_rotation" id="job_rotation" required>
+                            <small class="form-text text-muted">Choose a number that represents the number of times your job has been rotated.</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="branch_rotation">Branch Rotation</label>
+                            <input type="number" min="0" class="form-control" name="branch_rotation" id="branch_rotation" required>
+                            <small class="form-text text-muted">Choose a number that represents the number of times you've moved branches.</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="assign_of_other_position">Assign of Other Position</label>
+                            <input type="number" min="0" class="form-control" name="assign_of_other_position" id="assign_of_other_position" required>
+                            <small class="form-text text-muted">Choose a number that represents the number of times you served in another position.</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="annual_leave">Annual Leave</label>
+                            <input type="number" min="0" class="form-control" name="annual_leave" id="annual_leave" required>
+                            <small class="form-text text-muted">Choose a number that represents in units of days.</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="education_level">Education Level</label>
+                            <select class="form-control" name="education_level" id="education_level" required>
+                                <option value="">--</option>
+                                <option value="0">Level 0</option>
+                                <option value="1">Level 1</option>
+                                <option value="2">Level 2</option>
+                                <option value="3">Level 3</option>
+                                <option value="4">Level 4</option>
+                                <option value="5">Level 5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="job_duration_in_current_job_level">Job Duration in Current Job Level</label>
+                            <input type="number" min="0" step="any" class="form-control" name="job_duration_in_current_job_level" id="job_duration_in_current_job_level" required>
+                            <small class="form-text text-muted">Choose a number that represents in years (e.g. 1.35277493).</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="achievement_above_100_percent">Achievement Above 100% During 3 Quartal</label>
+                            <input type="number" min="0" class="form-control" name="achievement_above_100_percent" id="achievement_above_100_percent" required>
+                            <small class="form-text text-muted">Choose a number that represents the number of times your achievement was above 100% in the last 3 years.</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="gpa">GPA</label>
+                            <input type="number" min="0" min=0 max=4 step="any" class="form-control" name="gpa" id="gpa" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="job_duration_in_current_branch">Job Duration in Current Branch</label>
+                            <input type="number" min="0" step="any" class="form-control" name="job_duration_in_current_branch" id="job_duration_in_current_branch" required>
+                            <small class="form-text text-muted">Choose a number that represents in years (e.g. 1.35277493).</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select class="form-control" name="gender" id="gender" required>
+                                <option value="">--</option>
+                                <option value="1">Female</option>
+                                <option value="2">Male</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="number_of_dependences">Number of Dependences</label>
+                            <input type="number" min="0" class="form-control" name="number_of_dependences" id="number_of_dependences" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="job_duration_in_current_person_level">Job Duration in Current Person Level</label>
+                            <input type="number" min="0" step="any" class="form-control" name="job_duration_in_current_person_level" id="job_duration_in_current_person_level" required>
+                            <small class="form-text text-muted">Choose a number that represents in years (e.g. 1.35277493).</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3">
+                        <div class="form-group">
+                            <label for="last_achievement_percent">Last Achievement Percent</label>
+                            <div class="input-group">
+                                <input type="number" min="0" step="any" class="form-control" name="last_achievement_percent" id="last_achievement_percent" required>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="last_achievement_percent">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <div class="form-group text-center">
+                            <label for="model_classifier">Choose the classification algorithm model</label>
+                            <select class="form-control" name="model_classifier" id="model_classifier" required>
+                                <option value="">--</option>
+                                <option value="1">K-Nearest Neighbor Algorithm</option>
+                                <option value="2">Support Vector Machine Algorithm</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6 mt-3">
+                        <button class="submit-btn" type="submit">Make Prediction</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Age Script -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        let age_startYear = 1800;
+        let age_endYear = new Date().getFullYear();
+        for (i = age_endYear; i > age_startYear; i--)
+        {
+            $('#age').append($('<option />').val(i).html(i));
+        }
+    </script>
+
+    <!-- Year Script -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        let yg_startYear = 1800;
+        let yg_endYear = new Date().getFullYear();
+        
+        for (i = yg_endYear; i > yg_startYear; i--)
+        {
+            $('#year_graduated').append($('<option />').val(i).html(i));
+        }
+    </script>
+</body>
+</html>
