@@ -61,17 +61,20 @@
                         {% for data in datas %}
                         <tr>
                             <th scope="row" class="align-middle text-center">{{ loop.index }}</th>
-                            <td class="align-middle text-center">{{ data.last_achievement }}</td>
-                            <td class="align-middle text-center">{{ data.sick_leaves }}</td>
-                            <td class="align-middle text-center">{{ data.age }}</td>
-                            <td class="align-middle text-center">{{ data.job_rotation }}</td>
-                            <td class="align-middle text-center">{{ data.year_graduated }}</td>
-                            <td class="align-middle text-center">{{ data.job_duration_from_training }}</td>
-                            <td class="align-middle text-center">{{ data.branch_rotation }}</td>
-                            <td class="align-middle text-center">{{ data.assign_of_other_position }}</td>
-                            <td class="align-middle text-center">{{ data.annual_leave }}</td>
-                            <td class="align-middle text-center">{{ data.gpa }}</td>
+                            <td class="align-middle text-center">{{ data.job_duration_in_current_job_level }}</td>
+                            <td class="align-middle text-center">{{ data.job_duration_in_current_person_level }}</td>
                             <td class="align-middle text-center">{{ data.job_duration_in_current_branch }}</td>
+                            <td class="align-middle text-center">
+                                {% if (data.employee_type == '0') %}
+                                    RM_Type_A
+                                {% endif %}
+                                {% if (data.employee_type == '1') %}
+                                    RM_Type_B
+                                {% endif %}
+                                {% if (data.employee_type == '2') %}
+                                    RM_Type_C
+                                {% endif %}
+                            </td>
                             <td class="align-middle text-center">
                                 {% if (data.gender == '1') %}
                                     Female
@@ -80,8 +83,8 @@
                                     Male
                                 {% endif %}
                             </td>
+                            <td class="align-middle text-center">{{ data.age }}</td>
                             <td class="align-middle text-center">{{ data.number_of_dependences }}</td>
-                            <td class="align-middle text-center">{{ data.job_duration_in_current_person_level }}</td>
                             <td class="align-middle text-center">
                                 {% if (data.education_level == '0') %}
                                     Level 0
@@ -102,18 +105,15 @@
                                     Level 5
                                 {% endif %}
                             </td>
-                            <td class="align-middle text-center">
-                                {% if (data.employee_type == '0') %}
-                                    RM_Type_A
-                                {% endif %}
-                                {% if (data.employee_type == '1') %}
-                                    RM_Type_B
-                                {% endif %}
-                                {% if (data.employee_type == '2') %}
-                                    RM_Type_C
-                                {% endif %}
-                            </td>
-                            <td class="align-middle text-center">{{ data.job_duration_in_current_job_level }}</td>
+                            <td class="align-middle text-center">{{ data.gpa }}</td>
+                            <td class="align-middle text-center">{{ data.year_graduated }}</td>
+                            <td class="align-middle text-center">{{ data.job_duration_from_training }}</td>
+                            <td class="align-middle text-center">{{ data.branch_rotation }}</td>
+                            <td class="align-middle text-center">{{ data.job_rotation }}</td>
+                            <td class="align-middle text-center">{{ data.assign_of_other_position }}</td>
+                            <td class="align-middle text-center">{{ data.annual_leave }}</td>
+                            <td class="align-middle text-center">{{ data.sick_leaves }}</td>
+                            <td class="align-middle text-center">{{ data.last_achievement }}</td>
                             <td class="align-middle text-center">{{ data.achievement_above_100_during3quartal }}</td>
                             <td class="align-middle text-center">
                                 {% if (data.best_performance == '1') %}
